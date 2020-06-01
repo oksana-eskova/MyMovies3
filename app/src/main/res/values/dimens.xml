@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_margine">8dp</dimen>
+    <dimen name="size_progress_bar">42dp</dimen>
+    <dimen name="play_button_size">60dp</dimen>
+</resources>
