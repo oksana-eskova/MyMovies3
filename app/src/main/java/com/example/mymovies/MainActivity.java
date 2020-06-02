@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         adapter=new MovieAdapter();
-        recyclerViewPosters.setLayoutManager(new GridLayoutManager(this,getColumnCount()));
+        recyclerViewPosters.setLayoutManager(new GridLayoutManager(this,3));//getColumnCount()));
         recyclerViewPosters.setAdapter(adapter);
         adapter.setOnPosterClickListener(new MovieAdapter.OnPosterClickListener() {
             @Override
