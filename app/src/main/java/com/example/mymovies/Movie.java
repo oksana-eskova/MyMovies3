@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "movies")
 public class Movie {
     @PrimaryKey(autoGenerate = true)
-    private int uniqueId;
+    private int uniqueId; //уникальный ключ
     private int id;
     private int voteCount;
     private String title;
