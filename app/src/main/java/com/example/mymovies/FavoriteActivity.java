@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,7 +30,7 @@ public class FavoriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
         recyclerViewFavoriteMovies=findViewById(R.id.recyclerViewFavoriteMovies);
-        recyclerViewFavoriteMovies.setLayoutManager(new GridLayoutManager(this,2));
+        recyclerViewFavoriteMovies.setLayoutManager(new GridLayoutManager(this,getColumnCount()));
         adapter=new MovieAdapter();
         recyclerViewFavoriteMovies.setAdapter(adapter);
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
@@ -52,6 +53,7 @@ public class FavoriteActivity extends AppCompatActivity {
                 Movie movie=adapter.getMovies().get(position);
                 Intent intent=new Intent(FavoriteActivity.this, DetailActivity.class);
                 intent.putExtra("id",movie.getId());
+                intent.putExtra("whereFrom",2); //отправляет FavoriteActivity
                 startActivity(intent);
             }
         });
@@ -78,5 +80,12 @@ public class FavoriteActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    //расчет количества колонок в зависимости от ширины экрана
+    private int getColumnCount(){
+        DisplayMetrics displayMetrics=new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
+        int width=(int)(displayMetrics.widthPixels/displayMetrics.density);
+        return width/185>2?width/185:2;
     }
 }

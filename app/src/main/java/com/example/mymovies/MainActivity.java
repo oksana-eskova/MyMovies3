@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 Movie movie=adapter.getMovies().get(position);
                 Intent intent=new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra("id",movie.getId());
+                intent.putExtra("whereFrom",1); //отправляет MainActivity
                 startActivity(intent);
             }
         });

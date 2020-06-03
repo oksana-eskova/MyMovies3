@@ -52,6 +52,7 @@ public class DetailActivity extends AppCompatActivity {
     FavoriteMovie favoriteMovie;
 
     private int id;
+    private int whereFrom; //параметр из интента 1 - получено от MainActivity 2 - от FavouriteActivity
     private MainViewModel viewModel;
     private String lang;
     @Override
@@ -75,8 +76,17 @@ public class DetailActivity extends AppCompatActivity {
         }else {
             finish();//возврат к вызвавшей активности
         }
+        if(intent!=null&&intent.hasExtra("whereFrom")){
+            whereFrom=intent.getIntExtra("whereFrom",-1);
+        }else {
+            finish();//возврат к вызвавшей активности
+        }
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
-        movie=viewModel.getMovieById(id);
+        if(whereFrom==1) {
+            movie = viewModel.getMovieById(id);
+        }else{
+            movie=viewModel.getFavoriteMovieById(id);
+        }
         Picasso.get().load(movie.getBigPosterPath()).placeholder(R.drawable.no_picture).into(imageViewBigPoster);
         textViewTitle.setText(movie.getTitle());
         textViewOriginalTitle.setText(movie.getOriginalTitle());
